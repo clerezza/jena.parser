@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 <!--
 
  Licensed to the Apache Software Foundation (ASF) under one
@@ -22,15 +23,15 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>clerezza</artifactId>
-        <groupId>org.apache.clerezza</groupId>
-        <version>7</version>
+        <groupId>org.wymiwyg</groupId>
+        <artifactId>wymiwyg</artifactId>
+        <version>0.9.8</version>
         <relativePath></relativePath>
     </parent>
     <groupId>org.wymiwyg.clerezza</groupId>
     <artifactId>rdf.jena.parser</artifactId>
-    <packaging>bundle</packaging>
-    <version>1.1.2-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <version>2.0.0-SNAPSHOT</version>
     <name>Clerezza - RDF - Jena - Parser</name>
     <description>A ParserProvider based on jena</description>
     <dependencyManagement>
@@ -48,16 +49,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.wymiwyg.clerezza</groupId>
             <artifactId>rdf.jena.facade</artifactId>
             <version>2.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.scr.annotations</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.jena</groupId>
@@ -74,28 +72,5 @@
             <artifactId>jena-arq</artifactId>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-scr-plugin</artifactId>
-            </plugin>  
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>            
-                        <Include-Resource>
-                            {maven-resources}
-                        </Include-Resource>
-                    </instructions>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
-  <scm>
-    <tag>201508-1</tag>
-  </scm>
 </project>
