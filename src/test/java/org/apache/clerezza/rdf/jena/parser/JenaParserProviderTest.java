@@ -53,6 +53,19 @@ public class JenaParserProviderTest {
         Assert.assertEquals(graphFromNTriples, graphFromTurtle);
     }
     
+    /*
+     * comparing result from nt and JSON-LD parsing,
+     */
+    @Test
+    public void testJsonLdParser() {
+        ParsingProvider provider = new JenaParserProvider();
+        InputStream nTriplesIn = getClass().getResourceAsStream("test-04.nt");
+        InputStream jsonIn = getClass().getResourceAsStream("test-04.jsonld");
+        ImmutableGraph graphFromNTriples = parse(provider, nTriplesIn, "application/n-triples", null);
+        ImmutableGraph graphFromJsonLD = parse(provider, jsonIn, "application/ld+json", null);
+        Assert.assertEquals(graphFromNTriples, graphFromJsonLD);
+    }
+    
     @Test
     public void testNTriplesDataType() {
         ParsingProvider provider = new JenaParserProvider();

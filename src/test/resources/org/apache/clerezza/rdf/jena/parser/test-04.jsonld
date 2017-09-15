@@ -1,0 +1,9 @@
+[
+{"http://example.org/base#a":[{"@id":"http://example.org/base#b"}]},
+{"@id":"_:b1"},
+{"@id":"http://example.org/base#b"},
+{
+    "@id":"http://example.org/base#c",
+    "http://example.org/base#d":[{"@id":"_:b1"}]
+}
+]

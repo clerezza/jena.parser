@@ -24,8 +24,8 @@ import org.apache.clerezza.rdf.core.serializedform.ParsingProvider;
 import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
 import org.apache.clerezza.rdf.jena.facade.JenaGraph;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
@@ -35,24 +35,22 @@ import org.apache.clerezza.commons.rdf.IRI;
  * A {@link org.apache.clerezza.rdf.core.serializedform.ParsingProvider} based on Jena
  *
  * @author reto, mir
-
-/*
- * see http://jena.sourceforge.net/IO/iohowto.html
  */
+
 @Component(immediate=true)
 @Service(ParsingProvider.class)
 @Property(name="supportedFormat", value={SupportedFormat.RDF_XML,
     SupportedFormat.TURTLE,    SupportedFormat.X_TURTLE,
-    SupportedFormat.N_TRIPLE, SupportedFormat.N3})
+    SupportedFormat.N_TRIPLE, SupportedFormat.N3, "application/ld+json"})
 @SupportedFormat({SupportedFormat.RDF_XML,
     SupportedFormat.TURTLE,    SupportedFormat.X_TURTLE,
-    SupportedFormat.N_TRIPLE, SupportedFormat.N3})
+    SupportedFormat.N_TRIPLE, SupportedFormat.N3, "application/ld+json"})
 public class JenaParserProvider implements ParsingProvider {
 
     @Override
     public void parse(org.apache.clerezza.commons.rdf.Graph target, InputStream serializedGraph, String formatIdentifier, IRI baseUri) {
         String jenaFormat = getJenaFormat(formatIdentifier);
-        com.hp.hpl.jena.graph.Graph graph = new JenaGraph(target);
+        org.apache.jena.graph.Graph graph = new JenaGraph(target);
         Model model = ModelFactory.createModelForGraph(graph);
         String base;
         if (baseUri == null) {
@@ -80,6 +78,9 @@ public class JenaParserProvider implements ParsingProvider {
         }
         if (formatIdentifier.equals(SupportedFormat.N_TRIPLE)) {
             return "N-TRIPLE";
+        }
+        if (formatIdentifier.equals("application/ld+json")) {
+            return "JSONLD";
         }
         throw new UnsupportedParsingFormatException(formatIdentifier);
     }
