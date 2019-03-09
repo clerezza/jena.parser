@@ -23,14 +23,15 @@ import java.io.InputStream;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.apache.clerezza.rdf.core.serializedform.ParsingProvider;
-import org.apache.clerezza.commons.rdf.Graph;
-import org.apache.clerezza.commons.rdf.ImmutableGraph;
-import org.apache.clerezza.commons.rdf.IRI;
-import org.apache.clerezza.commons.rdf.Language;
-import org.apache.clerezza.commons.rdf.Literal;
-import org.apache.clerezza.commons.rdf.Triple;
-import org.apache.clerezza.commons.rdf.impl.utils.simple.SimpleGraph;
+
+import org.apache.clerezza.api.Graph;
+import org.apache.clerezza.api.ImmutableGraph;
+import org.apache.clerezza.api.IRI;
+import org.apache.clerezza.api.Language;
+import org.apache.clerezza.api.Literal;
+import org.apache.clerezza.api.Triple;
+import org.apache.clerezza.api.impl.graph.SimpleGraph;
+import org.apache.clerezza.representation.ParsingProvider;
 
 
 
