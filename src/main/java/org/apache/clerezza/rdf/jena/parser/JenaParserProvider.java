@@ -1,54 +1,64 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor  license  agreements.  See the NOTICE file distributed
+ * with this work  for  additional  information  regarding  copyright
+ * ownership.  The ASF  licenses  this file to you under  the  Apache
+ * License, Version 2.0 (the "License"); you may not  use  this  file
+ * except in compliance with the License.  You may obtain  a copy  of
+ * the License at
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * Unless  required  by  applicable law  or  agreed  to  in  writing,
+ * software  distributed  under  the  License  is  distributed  on an
+ * "AS IS"  BASIS,  WITHOUT  WARRANTIES  OR  CONDITIONS  OF ANY KIND,
+ * either  express  or implied.  See  the License  for  the  specific
+ * language governing permissions and limitations under  the License.
  */
 package org.apache.clerezza.rdf.jena.parser;
 
-import java.io.InputStream;
-
-import org.apache.clerezza.rdf.core.serializedform.ParsingProvider;
-import org.apache.clerezza.rdf.core.serializedform.SupportedFormat;
+import org.apache.clerezza.IRI;
 import org.apache.clerezza.rdf.jena.facade.JenaGraph;
-
+import org.apache.clerezza.representation.ParsingProvider;
+import org.apache.clerezza.representation.SupportedFormat;
+import org.apache.clerezza.representation.UnsupportedParsingFormatException;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Property;
-import org.apache.felix.scr.annotations.Service;
-import org.apache.clerezza.rdf.core.serializedform.UnsupportedParsingFormatException;
-import org.apache.clerezza.commons.rdf.IRI;
+import org.osgi.service.component.annotations.Component;
+
+import java.io.InputStream;
+
 /**
- * A {@link org.apache.clerezza.rdf.core.serializedform.ParsingProvider} based on Jena
+ * A {@link org.apache.clerezza.representation.ParsingProvider} based on Jena
  *
  * @author reto, mir
  */
-
-@Component(immediate=true)
-@Service(ParsingProvider.class)
-@Property(name="supportedFormat", value={SupportedFormat.RDF_XML,
-    SupportedFormat.TURTLE,    SupportedFormat.X_TURTLE,
-    SupportedFormat.N_TRIPLE, SupportedFormat.N3, "application/ld+json"})
-@SupportedFormat({SupportedFormat.RDF_XML,
-    SupportedFormat.TURTLE,    SupportedFormat.X_TURTLE,
-    SupportedFormat.N_TRIPLE, SupportedFormat.N3, "application/ld+json"})
+@Component(
+    name="Jena Parser Provider",
+    service=ParsingProvider.class,
+    property = {
+        "supportedFormat={" +
+            "SupportedFormat.RDF_XML," +
+            "SupportedFormat.TURTLE," +
+            "SupportedFormat.X_TURTLE," +
+            "SupportedFormat.N_TRIPLE," +
+            "SupportedFormat.N3," +
+            "\"application/ld+json\"" +
+        "}"
+    },
+    immediate=true
+)
+@SupportedFormat({
+    SupportedFormat.RDF_XML,
+    SupportedFormat.TURTLE,
+    SupportedFormat.X_TURTLE,
+    SupportedFormat.N_TRIPLE,
+    SupportedFormat.N3,
+    "application/ld+json"
+})
 public class JenaParserProvider implements ParsingProvider {
 
-    @Override
-    public void parse(org.apache.clerezza.commons.rdf.Graph target, InputStream serializedGraph, String formatIdentifier, IRI baseUri) {
+    public void parse(org.apache.clerezza.Graph target, InputStream serializedGraph, String formatIdentifier, IRI baseUri) {
         String jenaFormat = getJenaFormat(formatIdentifier);
         org.apache.jena.graph.Graph graph = new JenaGraph(target);
         Model model = ModelFactory.createModelForGraph(graph);
@@ -84,5 +94,4 @@ public class JenaParserProvider implements ParsingProvider {
         }
         throw new UnsupportedParsingFormatException(formatIdentifier);
     }
-
 }
