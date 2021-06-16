@@ -93,6 +93,6 @@
         <developerConnection>scm:git:git@github.com:clerezza/jena.parser.git</developerConnection>
         <connection>scm:git:https://github.com/clerezza/jena.parser.git</connection>
         <url>https://github.com/clerezza/jena.parser</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 </project>
