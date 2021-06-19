@@ -27,7 +27,7 @@
     <groupId>org.wymiwyg.clerezza</groupId>
     <artifactId>rdf.jena.parser</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.2-SNAPSHOT</version>
+    <version>2.0.2</version>
     <name>Clerezza - RDF - Jena - Parser</name>
     <description>A ParserProvider based on jena</description>
     <dependencyManagement>
@@ -93,6 +93,6 @@
         <developerConnection>scm:git:git@github.com:clerezza/jena.parser.git</developerConnection>
         <connection>scm:git:https://github.com/clerezza/jena.parser.git</connection>
         <url>https://github.com/clerezza/jena.parser</url>
-        <tag>HEAD</tag>
+        <tag>rdf.jena.parser-2.0.2</tag>
     </scm>
 </project>
